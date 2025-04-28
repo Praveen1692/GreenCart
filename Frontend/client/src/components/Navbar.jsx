@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useDeferredValue, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const { user, setUser, showUserLogin, navigate, setShowUserLogin } =
-    useAppContext();
+  const {
+    user,
+    setUser,
+    showUserLogin,
+    navigate,
+    setShowUserLogin,
+    searchQuery,
+    setSearchQuery,
+  } = useAppContext();
   console.log("showUserLogin", showUserLogin);
 
   const logout = async () => {
@@ -15,6 +22,11 @@ function Navbar() {
     setUser(null);
     navigate("/");
   };
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      navigate("/products");
+    }
+  }, [searchQuery]);
 
   const toggleProfile = () => {};
 
@@ -32,6 +44,7 @@ function Navbar() {
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
@@ -40,7 +53,10 @@ function Navbar() {
           <img src={assets.search_icon} alt="search" className="w-6 h-5" />
         </div>
 
-        <div className="relative cursor-pointer" onClick={()=>navigate("/cart")}>
+        <div
+          className="relative cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <img
             src={assets.nav_cart_icon}
             alt="cart"
@@ -68,8 +84,18 @@ function Navbar() {
               className="w-10  rounded-full "
             />
             <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40">
-              <li onClick={()=>navigate("/orders")} className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer" >My Orders</li>
-              <li onClick={logout} className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer" >Logout</li>
+              <li
+                onClick={() => navigate("/orders")}
+                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+              >
+                My Orders
+              </li>
+              <li
+                onClick={logout}
+                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+              >
+                Logout
+              </li>
             </ul>
           </div>
         )}
