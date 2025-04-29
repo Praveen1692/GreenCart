@@ -11,6 +11,7 @@ import { useAppContext } from "./context/AppContext";
 import Login from "./components/Login";
 import AllProduct from "./pages/AllProduct";
 import ProductCatrgory from "./pages/ProductCatrgory";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const isSellerPath = useLocation().pathname.includes("seller");
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<AllProduct />} />
           <Route path="/products/:category" element={<ProductCatrgory />} />
+          <Route path="/products/:category/:id" element={<ProductDetails />} />
         </Routes>
       </div>
       {!isSellerPath && <Footer />}
