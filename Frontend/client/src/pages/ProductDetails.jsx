@@ -111,9 +111,10 @@ function ProductDetails() {
 
         {/*related Products */}
 
-        <div>
-          <div>
+        <div className="flex flex-col items-center mt-20">
+          <div className="flex flex-col items-center w-max">
             <p>Related Products</p>
+            <div className="w-20 h-0.5 bg-primary rounded-full mt-2"></div>
           </div>
 
         </div>
