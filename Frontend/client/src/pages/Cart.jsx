@@ -146,16 +146,20 @@ const Cart = () => {
             </button>
             {showAddress && (
               <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                {addresses.map(() => (
+                {addresses.map((address, index) => (
                   <p
-                    onClick={() => setShowAddress(false)}
+                    onClick={() => {
+                      setSelectedAddress(address);
+                      setShowAddress(false);
+                    }}
                     className="text-gray-500 p-2 hover:bg-gray-100"
                   >
-                    New York, USA
+                    {address.street}, {address.city}, {address.state},{" "}
+                    {address.country}
                   </p>
                 ))}
                 <p
-                  onClick={() => setShowAddress(false)}
+                  onClick={() => navigate("/add-address")}
                   className="text-indigo-500 text-center cursor-pointer p-2 hover:bg-indigo-500/10"
                 >
                   Add address
