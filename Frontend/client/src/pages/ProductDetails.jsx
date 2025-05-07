@@ -108,6 +108,20 @@ function ProductDetails() {
             </div>
           </div>
         </div>
+
+        {/*related Products */}
+
+        <div>
+          <div>
+            <p>Related Products</p>
+          </div>
+
+        </div>
+
+
+
+
+
       </div>
     )
   );
