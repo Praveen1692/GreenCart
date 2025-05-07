@@ -7,12 +7,10 @@ import toast from "react-hot-toast";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-
   console.log("Appp context");
-  
+
   const currency = import.meta.VITE_CURRENCY;
   //console.log("curency",currency);
-  
 
   const navigate = useNavigate();
   const [user, setUser] = useState(true);
@@ -22,7 +20,7 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const [cartItems, setCartItems] = useState({});
-  const[searchQuery,setSearchQuery]=useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchProducts = async () => {
     console.log("fetchProducts called");
@@ -62,16 +60,35 @@ export const AppContextProvider = ({ children }) => {
     toast.success("Item Remove");
   };
 
+  // Get Cart Item Count
+
+  const getCartCount = () => {
+    let totalCount = 0;
+    for (const item in cartItems) {
+      totalCount += cartItems[item];
+    }
+    return totalCount;
+  };
+
+  // Get Total Amount Cart Item
+  const getTotalAmount = () => {
+    let amount = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      if (cartItems[items] > 0) {
+        amount += itemInfo.offerPrice * cartItems[items];
+      }
+    }
+    return Math.floor(amount * 100) / 100;
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  useEffect(()=>{
-
-    console.log("useEffect",products);
-    
-
-  },[])
+  useEffect(() => {
+    console.log("useEffect", products);
+  }, []);
 
   const value = {
     navigate,
@@ -88,7 +105,9 @@ export const AppContextProvider = ({ children }) => {
     removeFromCart,
     cartItems,
     searchQuery,
-    setSearchQuery
+    setSearchQuery,
+    getTotalAmount,
+    getCartCount,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

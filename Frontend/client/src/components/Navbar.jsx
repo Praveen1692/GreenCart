@@ -13,6 +13,7 @@ function Navbar() {
     setShowUserLogin,
     searchQuery,
     setSearchQuery,
+    getCartCount
   } = useAppContext();
   console.log("showUserLogin", showUserLogin);
 
