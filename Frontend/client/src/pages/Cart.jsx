@@ -28,6 +28,10 @@ const Cart = () => {
     setCartArray(tempArray);
   };
 
+  const placeorder=async()=>{
+
+  }
+
   useEffect(() => {
     if (products.length > 0 && cartItems) {
       getCart();
@@ -200,8 +204,8 @@ const Cart = () => {
           </p>
         </div>
 
-        <button className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
-          {}
+        <button onClick={placeorder} className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
+          {paymentOptions ==="COD"?"Place Order":"Proceed to Checkout"}
         </button>
       </div>
     </div>
