@@ -26,19 +26,33 @@ const MyOrders = () => {
             <span>Payment:{order.paymentType}</span>
             <span>Total Amount:${order.amount}</span>
           </p>
-          {order.items.map((item,index)=>(
+          {order.items.map((item, index) => (
             <div>
-                <div className="flex items-center mb-4 md:mb-0">
-                    <div className="bg-primary/10 p-4 rounded-lg">
-                        <img src={item.product.image[0]} alt="Product Image" className="w-16 h-16" />
-                    </div>
-                    <div className="ml-4">
-                        <h2 className="text-xl font-medium text-gray-800">{item.product.name}</h2>
-                        <p>Category:{item.product.category}</p>
-                    </div>
+              <div className="flex items-center mb-4 md:mb-0">
+                <div className="bg-primary/10 p-4 rounded-lg">
+                  <img
+                    src={item.product.image[0]}
+                    alt="Product Image"
+                    className="w-16 h-16"
+                  />
                 </div>
-            </div>
+                <div className="ml-4">
+                  <h2 className="text-xl font-medium text-gray-800">
+                    {item.product.name}
+                  </h2>
+                  <p>Category:{item.product.category}</p>
+                </div>
+              </div>
 
+              <div className="text-primary text-lg font-medium">
+                <p>Quantity: {item.quantity || "1"}</p>
+                <p>Status: {order.status}</p>
+                <p>Date:{new Date(order.createdAt).toLocaleString()}</p>
+              </div>
+              <p className="text-primary text-lg font-medium">
+                Amount : ${item.product.offerPrice * item.quantity}
+              </p>
+            </div>
           ))}
         </div>
       ))}
