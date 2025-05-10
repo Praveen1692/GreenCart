@@ -29,12 +29,27 @@ function SellerLogin() {
           </p>
           <div className="w-full">
             <p>Email</p>
-            <input type="email" name="email" placeholder="Enter Your Email..." />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Your Email..."
+              className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
+              required
+            />
           </div>
           <div className="w-full">
             <p>Password</p>
-            <input type="password" name="password" placeholder="Enter Your Password.." />
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Your Password.."
+              className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
+              required
+            />
           </div>
+          <button className="bg-primary text-white w-full py-2 rounded-md cursor-pointer">
+            Login
+          </button>
         </div>
       </form>
     )
