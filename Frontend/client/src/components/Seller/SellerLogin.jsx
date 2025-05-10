@@ -30,6 +30,8 @@ function SellerLogin() {
           <div className="w-full">
             <p>Email</p>
             <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               type="email"
               name="email"
               placeholder="Enter Your Email..."
@@ -40,6 +42,8 @@ function SellerLogin() {
           <div className="w-full">
             <p>Password</p>
             <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={password}
               type="password"
               name="password"
               placeholder="Enter Your Password.."
