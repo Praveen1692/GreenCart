@@ -27,6 +27,11 @@ const AddProduct = () => {
               .map((_, index) => (
                 <label key={index} htmlFor={`image${index}`}>
                   <input
+                    onChange={(e) => {
+                      const updatedFiles = [...files];
+                      updatedFiles[index] = e.target.files[0];
+                      setFiles(updatedFiles);
+                    }}
                     accept="image/*"
                     type="file"
                     id={`image${index}`}
@@ -52,6 +57,8 @@ const AddProduct = () => {
             Product Name
           </label>
           <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             id="product-name"
             type="text"
             placeholder="Type here"
@@ -68,6 +75,8 @@ const AddProduct = () => {
           </label>
           <textarea
             id="product-description"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
             rows={4}
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40 resize-none"
             placeholder="Type here"
@@ -79,6 +88,8 @@ const AddProduct = () => {
           </label>
           <select
             id="category"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
@@ -99,6 +110,8 @@ const AddProduct = () => {
               Product Price
             </label>
             <input
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
               id="product-price"
               type="number"
               placeholder="0"
@@ -111,7 +124,9 @@ const AddProduct = () => {
               Offer Price
             </label>
             <input
+              onChange={(e) => setOfferPrice(e.target.value)}
               id="offer-price"
+              value={offerPrice}
               type="number"
               placeholder="0"
               className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
