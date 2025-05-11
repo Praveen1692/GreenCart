@@ -42,7 +42,7 @@ function SellerLogin() {
           <div className="w-full">
             <p>Password</p>
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               value={password}
               type="password"
               name="password"

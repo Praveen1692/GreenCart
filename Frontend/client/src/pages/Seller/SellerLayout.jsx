@@ -1,8 +1,9 @@
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { useAppContext } from "../../context/AppContext";
 
 const SellerLayout = () => {
-  const { isSeller } = useAppContext();
+  const { isSeller, setIsSeller } = useAppContext();
 
   const dashboardicon = (
     <svg
@@ -69,42 +70,53 @@ const SellerLayout = () => {
       path: "/seller/product-list",
       icon: assets.product_list_icon,
     },
-    { name: "Orders", path: "/seller/orders", icon: chaticon },
+    { name: "Orders", path: "/seller/orders", icon: assets.order_icon },
   ];
+
+  const logout = async () => {
+    setIsSeller(false);
+  };
 
   return (
     <>
-      <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white transition-all duration-300">
-        <a href="/">
+      <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white">
+        <Link to="/">
           <img
-            className="h-9"
-            src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/dummyLogo/dummyLogoColored.svg"
-            alt="dummyLogoColored"
+            src={assets.logo}
+            alt="Logo"
+            className="cursor-pointer w-34 md:w-38"
           />
-        </a>
+        </Link>
         <div className="flex items-center gap-5 text-gray-500">
           <p>Hi! Admin</p>
-          <button className="border rounded-full text-sm px-4 py-1">
+          <button
+            onClick={logout}
+            className="border rounded-full text-sm px-4 py-1 cursor-pointer ransition-all duration-300 hover:bg-primary hover:text-white"
+          >
             Logout
           </button>
         </div>
       </div>
-      <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
-        {sidebarLinks.map((item, index) => (
-          <a
-            href={item.path}
-            key={index}
-            className={`flex items-center py-3 px-4 gap-3 
+      <div className="flex">
+        <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
+          {sidebarLinks.map((item) => (
+            <NavLink
+              to={item.path}
+              key={item.name}
+              end={item.path === "/seller"}
+              className={({ isActive }) => `flex items-center py-3 px-4 gap-3 
                             ${
-                              index === 0
-                                ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-indigo-500 text-indigo-500"
+                              isActive
+                                ? "border-r-4 md:border-r-[6px] bg-primary/10 border-primary text-primary"
                                 : "hover:bg-gray-100/90 border-white text-gray-700"
                             }`}
-          >
-            {item.icon}
-            <p className="md:block hidden text-center">{item.name}</p>
-          </a>
-        ))}
+            >
+              <img src={item.icon} alt="Icon" className="w-7 h-7" />
+              <p className="md:block hidden text-center">{item.name}</p>
+            </NavLink>
+          ))}
+        </div>
+        <Outlet />
       </div>
     </>
   );
