@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { assets } from "../../assets/assets";
+import { assets, categories } from "../../assets/assets";
 
 const AddProduct = () => {
   const [files, setFiles] = useState([]);
@@ -93,7 +93,7 @@ const AddProduct = () => {
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
-            {category.map((items, index) => (
+            {categories.map((items, index) => (
               <option key={index} value={items.path}>
                 {items.path}
               </option>
@@ -120,7 +120,7 @@ const AddProduct = () => {
               Offer Price
             </label>
             <input
-              onChange={(e) => setOfferPrice(e.target.value)}
+              onChange={(e) => setOfferPrice(e.target.value)}s
               id="offer-price"
               value={offerPrice}
               type="number"
@@ -130,7 +130,7 @@ const AddProduct = () => {
             />
           </div>
         </div>
-        <button className="px-8 py-2.5 bg-indigo-500 text-white font-medium rounded">
+        <button className="px-8 py-2.5 bg-primary  hover:bg-primary-dull text-white font-medium rounded cursor-pointer">
           ADD
         </button>
       </form>
