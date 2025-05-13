@@ -49,10 +49,26 @@ export const login = async (req, res) => {
     if (!checkEmail) {
       return res.json({ success: false, message: "Email id is not register" });
     }
-    const checkPassword=await bcrypt.compare(password,checkEmail.password);
-    if(!checkPassword){
-        return res.json({success:flase,message:"password is not correct.."})
+    const checkPassword = await bcrypt.compare(password, checkEmail.password);
+    if (!checkPassword) {
+      return res.json({ success: false, message: "password is not correct.." });
     }
+    const token = jwt.sign({ id: checkEmail._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
-  } catch (error) {}
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+    return res.json({
+      success: true,
+      user: { email: checkEmail.email, name: checkEmail.name },
+    });
+  } catch (error) {
+    console.error(error.message);
+
+    res.json({ success: false, message: error.message });
+  }
 };
