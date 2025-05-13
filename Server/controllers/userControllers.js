@@ -2,6 +2,7 @@ import { use } from "react";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import cookie from "cookie-parser";
 
 // Register User;
 export const register = async (req, res) => {
@@ -17,6 +18,14 @@ export const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashPassword });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: true,
+    });
   } catch (error) {}
 };
