@@ -20,3 +20,5 @@ const authUser = async (req, res, next) => {
     req.json({ success: false, message: error.message });
   }
 };
+
+export default authUser;
