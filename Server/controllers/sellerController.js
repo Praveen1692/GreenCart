@@ -1,7 +1,7 @@
 // Seller Login-> /api/seller/login;
 import jwt from "jsonwebtoken";
 
-export const login = async (req, res) => {
+export const sellerLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
@@ -22,6 +22,31 @@ export const login = async (req, res) => {
     } else {
       return res.json({ success: false, message: "Invalid Credentials" });
     }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//Seller Auth-> /api/seller/is-auth;
+
+export const isSellerAuth = async () => {
+  try {
+    return res.json({ success: true });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//Seller Logout->/api/seller/logout
+
+export const sellerLogout = async (req, res) => {
+  try {
+    res.clearCookie("sellerToken", {
+      httpOnly: true,
+    });
+    return res.json({ success: true, message: "Logged Out" });
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
