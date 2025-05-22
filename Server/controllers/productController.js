@@ -1,5 +1,14 @@
+import Product from "../models/Product.js";
+import { upload } from "../config/multer.js";
+
 //Add->: /api/product/add
-export const addProduct = async (req, res) => {};
+export const addProduct = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+};
 
 //Product List->: /api/product/list
 export const productList = async (req, res) => {};
